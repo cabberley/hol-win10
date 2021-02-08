@@ -192,3 +192,5 @@ __Configure the Workstation:__ _(30 Minutes)_
         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
     fi
     ```
+-Install HELM
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash

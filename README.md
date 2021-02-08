@@ -27,11 +27,14 @@ Open an RDP Session to the Virtual Machine to perform the remaining setup and co
 
 __Configure the Workstation:__ _(30 Minutes)_
 
+
+- If the default user was changed add the user to the group - use PowerShell
+
+        1. `Add-LocalGroupMember -Group "docker-users" -Member $env:UserName`
+        2. Log out and Log back into the RDP session       
+        
+        
 - Start Docker-Desktop
-
-   - If the default user was changed add the user to the group
-
-        `Add-LocalGroupMember -Group "docker-users" -Member $env:UserName`
 
    - In Docker Settings enable the following settings.
 
@@ -150,11 +153,19 @@ __Configure the Workstation:__ _(30 Minutes)_
     ```
 
   - Install terraform using tfenv
+  - NOTE: need to create .local/bin directory
+    On Ubuntu/Debian touching /usr/local/bin might require sudo access, but you can create ${HOME}/bin or ${HOME}/.local/bin and on next login it will get added to the session    $PATH or by running . ${HOME}/.profile it will get added to the current shell session's $PATH.
+
+        $ mkdir -p ~/.local/bin/
+        $ . ~/.profile
+        $ ln -s ~/.tfenv/bin/* ~/.local/bin
+        $ which tfenv
 
     ```bash
     git clone https://github.com/tfutils/tfenv.git ~/.tfenv
     ln -s ~/.tfenv/bin/* ~/.local/bin
 
+    - Restart terminal session required for next steps
     tfenv install 0.12.24
     tfenv use 0.12.24
     ```
